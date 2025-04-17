@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  
+  backend:
+    build:
+      context: ./Backend/erp_backend  
+      dockerfile: Dockerfile          
+    container_name: django_app
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    volumes:
+      - ./Backend/erp_backend:/app  
+    ports:
+      - "8000:8000"  
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/your_db
+      - REDIS_URL=redis://redis:6379/0
+      - SECRET_KEY=your_secret_key
+    depends_on:
+      - postgres
+      - redis
+
+  frontend:
+    build:
+      context: /c/Users/vishn/Desktop/ERP Project/Frontend/erp-frontend  
+      dockerfile: Dockerfile           
+    container_name: angular_app
+    ports:
+      - "80:80"  
+    depends_on:
+      - backend  
+  postgres:
+    image: postgres:13
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: your_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"  
+  redis:
+    image: redis:alpine
+    container_name: redis_cache
+    ports:
+      - "6379:6379"  
+volumes:
+  postgres_data:
+    driver: local
