@@ -12,7 +12,6 @@ RUN npm install
 # Copy the rest of the frontend source code
 COPY frontend /app/
 
-# Build the Angular app
 RUN npm run build --prod
 
 # Serve the Angular app using Nginx
