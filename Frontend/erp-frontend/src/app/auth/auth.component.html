@@ -1,0 +1,46 @@
+<h3 class="text-center fw-bold mt-2" style="font-size: 2.5rem; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+Login To Continue
+</h3>
+
+
+
+<div class="d-flex justify-content-center align-items-center mt-5">
+
+  <div class="p-4 rounded-4 shadow-lg bg-white" style="width: 500px;">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          formControlName="username"
+          class="form-control"
+          placeholder="Enter username"
+        />
+        <div *ngIf="loginForm.controls.username.invalid && loginForm.controls.username.touched" class="text-danger">
+          Username is required and must be at least 3 characters long.
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-control"
+          placeholder="Enter password"
+        />
+        <div *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched" class="text-danger">
+          Password is required and must be at least 6 characters long.
+        </div>
+      </div>
+      <br><br>
+      <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid || loading">Login</button>
+    
+      <div *ngIf="successMessage" class="text-success mt-2">{{ successMessage }}</div>
+
+      <div *ngIf="errorMessage" class="text-danger mt-2">{{ errorMessage }}</div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<table class="table" >
+    <thead>
+      <tr>
+        <th scope="col">Order ID</th>
+        <th scope="col">Username</th>
+        <th scope="col">Role</th>
+        <th scope="col">Created At</th>
+        <th scope="col">Product Name</th>
+        
+                  
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.id }}</td>
+        <td>{{ order.user.username }}</td>
+        <td>{{ order.user.role }}</td>
+        <td>{{ order.created_at | date:'short' }}</td>
+  
+        <td *ngFor="let item of order.items">
+          <div>
+            {{ item.products.name }} 
+            <span class="text-muted">(SKU: {{ item.products.sku }})</span>
+          </div>
+          <div>
+            Price: ₹{{ item.products.price }} 
+          </div>
+          <div>
+            Quantity: {{ item.quantity }}
+          </div>
+
+          <div>
+            <!-- <strong>Total Price: ₹{{ item.quantity * (item.products.price | number:'1.2-2') | parseFloat }}</strong> -->
+            <!-- <strong>Total Price: ₹{{ getTotalPrice(item) }}</strong> -->
+          </div>
+        </td>
+        <td>
+          <button class="btn btn-outline-secondary" (click)="invoice(order.id)">
+            <i class="fas fa-file-download me-1"></i> Download Invoice
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

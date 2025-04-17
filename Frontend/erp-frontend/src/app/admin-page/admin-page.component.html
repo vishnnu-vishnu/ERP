@@ -1,0 +1,185 @@
+<div class="position-relative">
+  <img src="https://sloboda-studio.com/wp-content/uploads/2022/02/Frame-21.png.webp" 
+         class="img-fluid w-100" 
+         style="height: 600px; object-fit: cover;" 
+         alt="Banner" />
+<div class="position-absolute top-50 start-0 translate-middle-y text-black ps-5" style="width: 100%;">
+  <h2 style="font-size: 3rem; font-weight: bold;">Welcome Admin !</h2>
+
+  <div class="d-flex flex-column align-items-start gap-3 mt-4">
+    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#salestaffModal" (click)="loadsalestaff()">
+      See Sale Staff
+    </button>
+
+    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#warehousemodal" (click)="loadwarehousetaff()">
+      See Warehouse Staff
+    </button>
+
+    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#ordermodal" (click)="loadorder()">
+      See Order Details
+    </button>
+
+    <button type="button" class="btn btn-outline-secondary" routerLink="/warehouse">
+      See Products
+    </button>
+  </div>
+</div>
+</div>
+
+
+  <!-- sales modal -->
+  <div class="modal fade" id="salestaffModal" tabindex="-1" aria-labelledby="salestaffModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        
+        <div class="modal-header">
+          <h3 class="modal-title" id="salestaffModalLabel">Sales Staff Details</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+          <table class="table" >
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+                
+        
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-active" *ngFor="let sale of salestaffs">
+                <td>{{ sale.id }}</td>
+                <td>{{ sale.username }}</td>
+                <td>{{ sale.email }}</td>
+                <td>{{ sale.role }}</td>
+                <!-- <td><button  type="submit" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="openEditModal(product)">Edit</button></td> -->
+                <!-- <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="openEditModal(product)">
+                  Edit
+                </button> -->
+                <!-- <td><button  type="submit" class="btn btn-outline-secondary" (click)="deleteProduct(product.id)">Delete</button></td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+
+  <!-- warehousemodal -->
+
+  <div class="modal fade" id="warehousemodal" tabindex="-1" aria-labelledby="warehousemodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        
+        <div class="modal-header">
+          <h3 class="modal-title" id="warehousemodalLabel">Sales Staff Details</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+          <table class="table" >
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+                
+        
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-active" *ngFor="let sale of salestaffs">
+                <td>{{ sale.id }}</td>
+                <td>{{ sale.username }}</td>
+                <td>{{ sale.email }}</td>
+                <td>{{ sale.role }}</td>
+                <!-- <td><button  type="submit" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="openEditModal(product)">Edit</button></td> -->
+                <!-- <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="openEditModal(product)">
+                  Edit
+                </button> -->
+                <!-- <td><button  type="submit" class="btn btn-outline-secondary" (click)="deleteProduct(product.id)">Delete</button></td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ordermodal -->
+
+  <div class="modal fade" id="ordermodal" tabindex="-1" aria-labelledby="ordermodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        
+        <div class="modal-header">
+          <h3 class="modal-title" id="ordermodalLabel">Sales Staff Details</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+          <table class="table" >
+            <thead>
+              <tr>
+                <th scope="col">Order ID</th>
+                <th scope="col">Username</th>
+                <th scope="col">Role</th>
+                <th scope="col">Created At</th>
+                <th scope="col">Product Name</th>
+                
+                          
+        
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of orders">
+                <td>{{ order.id }}</td>
+                <td>{{ order.user.username }}</td>
+                <td>{{ order.user.role }}</td>
+                <td>{{ order.created_at | date:'short' }}</td>
+          
+                <!-- Loop through each item in the order's items array -->
+                <td *ngFor="let item of order.items">
+                  <div>
+                    {{ item.products.name }} 
+                    <span class="text-muted">(SKU: {{ item.products.sku }})</span>
+                  </div>
+                  <div>
+                    Price: ₹{{ item.products.price }} 
+                  </div>
+                  <div>
+                    Quantity: {{ item.quantity }}
+                  </div>
+                  <div>
+                    <!-- <strong>Total Price: ₹{{ item.quantity * (item.products.price | number:'1.2-2') | parseFloat }}</strong> -->
+                    <strong>Total Price: ₹{{ getTotalPrice(item) }}</strong>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  

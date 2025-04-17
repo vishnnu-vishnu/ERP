@@ -1,0 +1,52 @@
+<br><div class="d-flex justify-content-end mb-3">
+  <button class="btn btn-outline-secondary" routerLink="/sales">View Orders</button>
+</div>
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let product of products">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">SKU: {{ product.sku }}</p>
+          <p class="card-text">Category: {{ product.category }}</p>
+          <p class="card-text fw-bold text-success">₹{{ product.price }}</p>
+          <p class="card-text">Stock: {{ product.stock_quantity }}</p>
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-outline-secondary" (click)="openBuyModal(product)">Buy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Order Details -->
+<div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="buyModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="buyModalLabel">Buy Product</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Name:</strong> {{ selectedProduct?.name }}</p>
+        <p><strong>Price:</strong> ₹{{ selectedProduct?.price }}</p>
+        <p><strong>Stock:</strong> {{ selectedProduct?.stock_quantity }}</p>
+
+        <div class="mb-3">
+          <label for="quantity" class="form-label">Quantity:</label>
+          <input type="number" [(ngModel)]="orderQuantity" class="form-control" min="1" [max]="selectedProduct?.stock_quantity || 0">
+        </div>
+        
+        <div class="mb-3">
+          <strong>Total Amount: ₹{{ calculateTotalAmount() }}</strong>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" (click)="placeOrder()">Place Order</button>
+      </div>
+    </div>
+  </div>
+</div>
