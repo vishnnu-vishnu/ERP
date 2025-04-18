@@ -24,7 +24,7 @@ services:
 
   frontend:
     build:
-      context: /c/Users/vishn/Desktop/ERP Project/Frontend/erp-frontend  
+      context: ./Frontend/erp-frontend
       dockerfile: Dockerfile           
     container_name: angular_app
     ports:
@@ -33,11 +33,10 @@ services:
       - backend  
   postgres:
     image: postgres:13
-    container_name: postgres_db
     environment:
-      POSTGRES_DB: your_db
+      POSTGRES_DB: your_db_name
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: your_password
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
